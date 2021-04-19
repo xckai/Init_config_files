@@ -1,12 +1,16 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
-  mode: 'production',
+  mode: 'development',
   entry: {
     index: './src/index.tsx'
   },
-  plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' }),new ForkTsCheckerWebpackPlugin()],
+  devtool: 'inline-source-map',
+  devServer: {
+    contentBase: './src',
+    port: 9000
+  },
+  plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })],
   module: {
     rules: [
       {
@@ -22,10 +26,9 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        // Include ts, tsx, js, and jsx files.
-        test: /\.(ts|js)x?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader'
+        test: /\.tsx?$/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.less$/,
@@ -48,7 +51,7 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.[hash].js',
+    filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist')
   },
   resolve: {
