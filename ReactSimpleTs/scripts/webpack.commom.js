@@ -1,11 +1,12 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 module.exports = {
   mode: 'production',
   entry: {
     index: './src/index.tsx'
   },
-  plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: 'src/index.html' }), new ForkTsCheckerWebpackPlugin()],
   module: {
     rules: [
       {
@@ -21,9 +22,10 @@ module.exports = {
         use: ['file-loader']
       },
       {
-        test: /\.tsx?$/,
-        use: 'ts-loader',
-        exclude: /node_modules/
+        // Include ts, tsx, js, and jsx files.
+        test: /\.(ts|js)x?$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader'
       },
       {
         test: /\.less$/,
@@ -46,10 +48,29 @@ module.exports = {
     ]
   },
   output: {
-    filename: '[name].bundle.[hash].js',
-    path: path.resolve(__dirname, 'dist')
+    filename: '[name].[contenthash:8].js',
+    path: path.resolve(__dirname, '../dist')
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js']
+  },
+  stats: {
+    colors: true,
+    env: true,
+    errors: true,
+    performance: true,
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          name:'common',
+          test: /[\\/]node_modules[\\/]/, // 匹配node_modules目录下的文件
+          priority: -10,
+          chunks:'initial'
+        }
+      }
+    }
   }
 };
