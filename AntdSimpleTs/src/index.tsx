@@ -1,0 +1,15 @@
+/*
+ * @Date: 2021-05-03 14:49:30
+ * @LastEditTime: 2021-05-03 15:07:29
+ * @Description:
+ */
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+import App from './App';
+
+
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);

@@ -1,6 +1,6 @@
 /*
- * @Date: 2021-05-02 21:52:48
- * @LastEditTime: 2021-05-03 15:06:33
+ * @Date: 2021-05-03 14:49:30
+ * @LastEditTime: 2021-05-03 15:05:43
  * @Description:
  */
 const path = require("path");
@@ -46,6 +46,11 @@ module.exports = {
           },
           {
             loader: "less-loader",
+            options: {
+              lessOptions: {
+                javascriptEnabled: true,
+              },
+            },
           },
         ],
       },
