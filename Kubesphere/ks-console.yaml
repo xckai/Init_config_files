@@ -1,0 +1,66 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"labels":{"app":"ks-console","tier":"frontend","version":"v3.1.0"},"name":"ks-console","namespace":"kubesphere-system"},"spec":{"ports":[{"name":"nginx","nodePort":30880,"port":80,"protocol":"TCP","targetPort":8000}],"selector":{"app":"ks-console","tier":"frontend","version":"v3.1.0"},"type":"NodePort"}}
+  creationTimestamp: "2021-06-02T08:00:39Z"
+  labels:
+    app: ks-console
+    tier: frontend
+    version: v3.1.0
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+        f:labels:
+          .: {}
+          f:app: {}
+          f:tier: {}
+          f:version: {}
+      f:spec:
+        f:externalTrafficPolicy: {}
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:nodePort: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+          f:tier: {}
+          f:version: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl
+    operation: Update
+    time: "2021-06-02T08:00:39Z"
+  name: ks-console
+  namespace: kubesphere-system
+  resourceVersion: "16919"
+  selfLink: /api/v1/namespaces/kubesphere-system/services/ks-console
+  uid: 9ed558ce-55c9-4987-8c70-390f8c5c6bcb
+spec:
+  clusterIP: 10.0.21.235
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: nginx
+    port: 80
+    protocol: TCP
+    targetPort: 8000
+  selector:
+    app: ks-console
+    tier: frontend
+    version: v3.1.0
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer: {}

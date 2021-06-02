@@ -1,6 +1,7 @@
-import React from "react";
-import { Button, DatePicker, version } from "antd";
-import "./App.less";
+import React from 'react';
+import { Button, DatePicker, version } from 'antd';
+import './App.less';
+import 'core-js';
 const App = () => {
   return (
     <div className="App">
