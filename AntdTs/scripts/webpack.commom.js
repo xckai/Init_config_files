@@ -72,18 +72,29 @@ module.exports = {
     env: true,
     errors: true,
     performance: true
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        vendors: {
+          name: 'common',
+          test: /[\\/]node_modules[\\/]/, // 匹配node_modules目录下的文件
+          priority: -10
+        }
+        // },
+        // basicCommon: {
+        //   priority: -5,
+        //   name: 'basic_common',
+        //   test: function (module, chunk) {
+        //     return (
+        //       module.resource &&
+        //       module.resource.endsWith('.js') &&
+        //       (module.resource.includes(`react`) || module.resource.includes(`antd`) || module.resource.includes(`moment`))
+        //     );
+        //   }
+        // }
+      }
+    }
   }
-  // optimization: {
-  //   splitChunks: {
-  //     chunks: 'all',
-  //     cacheGroups: {
-  //       vendors: {
-  //         name: 'common',
-  //         test: /[\\/]node_modules[\\/]/, // 匹配node_modules目录下的文件
-  //         priority: -10,
-  //         chunks: 'initial'
-  //       }
-  //     }
-  //   }
-  // }
 };
